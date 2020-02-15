@@ -20,6 +20,8 @@ def show_cam():
         if key == 27:  # Press esc to exit
             print("Program exited")
             break
+        if key == 48:
+            save(roi)
     cam.release()
 
 
@@ -31,5 +33,9 @@ def detection(img):
     img = cv.rectangle(img, (w_roi[0],  h_roi[0]), (w_roi[1], h_roi[1]), (255, 255, 255))
     return img, roi
 
+def save(img):
+    img = cv.resize(img, (64, 64))
+    cv.imwrite("ASL-test.jpg", img)
 
 show_cam()
+
