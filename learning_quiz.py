@@ -8,7 +8,7 @@ LETTERS = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
            'R', 'S', 'space', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 SAVE_FILE = 'verifier/saved_image.jpg'
-sequence = []
+sequence = ['A', 'B', 'C', 'D', 'E']
 
 
 def generate_sequence(size):
@@ -18,7 +18,7 @@ def generate_sequence(size):
 
 
 def video_cap():
-    sequence = ['A', 'B', 'C', 'D', 'E']
+    sequence = []
 
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
@@ -28,7 +28,7 @@ def video_cap():
     correct = False
     ts = time.time()
     guessed = ''
-    show_congrats = False
+    show_congrats = True
 
     while i < len(sequence):
 
@@ -45,13 +45,12 @@ def video_cap():
 
         # exit
         if key & 0xFF == 27:
+            show_congrats = False
             break
 
         if correct and time.time() - ts > 3:
             correct = False
             i += 1
-            if i == len(sequence):
-                show_congrats = True
 
         if correct:
             img = cv2.rectangle(frame, (x, y), (x + roi_size, y + roi_size), (0, 255, 0), 1)
@@ -79,7 +78,7 @@ def video_cap():
 
     # display congratulations
     if show_congrats:
-
+        print('hi')
         ts = time.time()
         while time.time() - ts < 5:
             ret, frame = cap.read()
