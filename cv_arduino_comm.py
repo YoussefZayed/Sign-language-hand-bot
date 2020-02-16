@@ -35,7 +35,7 @@ def video_cap(arduino):
     cap.release()
     cv2.destroyAllWindows()
 
-u
+
 def init_arduino_comm():
     return serial.Serial(ARDUINO_PORT, 115200, timeout=.1)
 
