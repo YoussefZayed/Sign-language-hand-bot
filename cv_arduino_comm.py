@@ -1,6 +1,8 @@
-import serial, time
+import serial
 import cv2
-import numpy as np
+
+SAVE_FILE = 'saved_image.jpg'
+ARDUINO_PORT = '/dev/ttyACM0'
 
 
 def video_cap(arduino):
@@ -9,29 +11,33 @@ def video_cap(arduino):
     while True:
 
         ret, frame = cap.read()
+        frame = cv2.flip(frame, 1)
         cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
         cv2.resizeWindow('frame', 2000, 2000)
 
-        h, w, _ = frame.shape
+        h, w, _ = frame.shapes
         h, w = int(h/2), int(w/2)
         x, y = w - int(w/2), h - int(h/2)
-
-        img = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 1)
-        cv2.imshow('frame', img)
 
         if cv2.waitKey(1) & 0xFF == 27:
             break
 
         elif cv2.waitKey(1) & 0xFF == ord('s'):
-            # send over some data to arduino
-            send_data(arduino, 'test')
+            roi = frame[y:y+h, x:x+w]
+            cv2.imwrite(SAVE_FILE, roi)
+
+            # get letter based on image
+            # send_data(arduino, letter)
+
+        img = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+        cv2.imshow('frame', img)
 
     cap.release()
     cv2.destroyAllWindows()
 
-
+u
 def init_arduino_comm():
-    return serial.Serial('/dev/ttyACM0', 115200, timeout=.1)
+    return serial.Serial(ARDUINO_PORT, 115200, timeout=.1)
 
 
 def send_data(arduino, data):
