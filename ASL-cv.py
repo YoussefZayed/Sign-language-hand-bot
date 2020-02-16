@@ -23,7 +23,8 @@ def show_cam():
             print("Program exited")
             break
         if key == 48:
-            check(roi)
+            letter = check(roi)
+            cv.putText(img,letter,(30,30),FONT_HERSHEY_SIMPLEX,20,(0,0,0))
         if key == 49:
             save(roi)
     cam.release()
@@ -56,7 +57,9 @@ def check(img):
     img = cv.resize(img, (64, 64))
     
     cv.imwrite("verifier/"+"test.jpg", img)
-    verify.verf()
+    prediction = verify.verf()
+    print(prediction)
+    return(prediction[0])
 
 show_cam()
 

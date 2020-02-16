@@ -50,8 +50,9 @@ def verf():
     predictions = prediction_generator(new_testing_data, 4096, model)
 
     CATEGORIES = ['A', 'B' , 'C' , 'D' , 'del', 'E' , 'F' , 'G' , 'H', 'I', 'J', 'K', 'L' ,'M' , 'N', 'nothing', 'O', 'P' , 'Q' , 'R' , 'S' , 'space' , 'T' ,'U' , 'V', 'W', 'X' , 'Y' , 'Z']
+    answers = []
     for i in predictions:
-        print(CATEGORIES[i])
-
+        answers.append(CATEGORIES[i])
+    return answers
 if __name__ == "__main__":
     verf()
