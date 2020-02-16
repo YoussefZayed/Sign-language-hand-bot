@@ -8,7 +8,7 @@ LETTERS = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
            'R', 'S', 'space', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 SAVE_FILE = 'verifier/saved_image.jpg'
-sequence = ['A', 'B', 'C', 'D', 'E']
+sequence = []
 
 
 def generate_sequence(size):
@@ -18,7 +18,7 @@ def generate_sequence(size):
 
 
 def video_cap():
-    sequence = []
+    sequence = ['A', 'B', 'C', 'D', 'E']
 
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
