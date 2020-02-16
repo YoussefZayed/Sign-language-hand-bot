@@ -1,6 +1,8 @@
 import serial
+import time
 import cv2
 from verify import predict
+
 
 SAVE_FILE = 'verifier/saved_image.jpg'
 ARDUINO_PORT = '/dev/ttyACM0'
@@ -12,30 +14,37 @@ def video_cap(arduino):
     cv2.resizeWindow('Video Stream', 2000, 1500)
 
     letter = ' '
+    ts = time.time()
 
     while True:
 
         ret, frame = cap.read()
         frame = cv2.flip(frame, 1)
 
+        # get roi dimensions
         roi_scale = 2
         h, w, _ = frame.shape
         roi_size = int(h/roi_scale)
         x, y = int(w/2) - int(roi_size/2), int(h/2) - int(roi_size/2)
 
+        if time.time() - ts > 2:
+            roi = frame[y:y + roi_size, x:x + roi_size]
+            cv2.imwrite(SAVE_FILE, roi)
+            letter = predict()
+            ts = time.time()
+
         img = cv2.rectangle(frame, (x, y), (x + roi_size, y + roi_size), (0, 255, 0), 1)
         cv2.putText(img, letter, (x, y - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Video Stream', img)
 
-        if cv2.waitKey(1) & 0xFF == 27:
+        key = cv2.waitKey(100)
+
+        # exit
+        if key & 0xFF == 27:
             break
 
-        if cv2.waitKey(1) & 0xFF == ord('s'):
-            roi = frame[y:y + roi_size, x:x + roi_size]
-            cv2.imwrite(SAVE_FILE, roi)
-
-            letter = predict()
-
+        # send data to Arduino
+        if key & 0xFF == ord('s'):
             if letter == 'nothing':
                 send_data(arduino, '[')
             elif letter == 'space':
