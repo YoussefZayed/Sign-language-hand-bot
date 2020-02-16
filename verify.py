@@ -31,6 +31,7 @@ def create_testing_data(path, input_shape):
     new_testing_data = new_testing_data.astype('float32')/255.0
     return (testing_data, new_testing_data, names)
 
+
 def prediction_generator(testing_data, input_shape, model):
     '''This function generates predictions for both sets of testing data'''
     predictions=[]
@@ -52,7 +53,20 @@ def verf():
     CATEGORIES = ['A', 'B' , 'C' , 'D' , 'del', 'E' , 'F' , 'G' , 'H', 'I', 'J', 'K', 'L' ,'M' , 'N', 'nothing', 'O', 'P' , 'Q' , 'R' , 'S' , 'space' , 'T' ,'U' , 'V', 'W', 'X' , 'Y' , 'Z']
     answers = []
     for i in predictions:
-        answers.append(CATEGORIES[i])
-    return answers
+        print(CATEGORIES[i])
+
+
+def predict():
+    model = load_model('weights2.best.h5')
+    testing_data, new_testing_data, names = create_testing_data("verifier", 4096)
+
+    predictions = prediction_generator(new_testing_data, 4096, model)
+
+    CATEGORIES = ['A', 'B', 'C', 'D', 'del', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'nothing', 'O', 'P', 'Q',
+                  'R', 'S', 'space', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+    return CATEGORIES[predictions[0]]
+
+
 if __name__ == "__main__":
     verf()
