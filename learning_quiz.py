@@ -87,7 +87,8 @@ def video_cap():
 
             h, w, _ = frame.shape
 
-            cv2.putText(img, 'Congratulations!', (int(w/2) - int(w/4), int(h/2)), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 0), 2)
+            cv2.putText(img, 'Congratulations!', (int(w/2) - int(w/4), int(h/2)),
+                        cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 0), 2)
             cv2.imshow('Video Stream', img)
 
             key = cv2.waitKey(100)
