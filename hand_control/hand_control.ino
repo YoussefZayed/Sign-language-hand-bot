@@ -84,6 +84,9 @@ void setup() {
   servos[2].attach(6);
   servos[3].attach(7);
   servos[4].attach(8);
+
+  for (int i = 0; i < 5; ++i)
+    servos[i].write(0);
 }
 
 void loop() {  
