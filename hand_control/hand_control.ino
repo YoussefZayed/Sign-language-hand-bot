@@ -12,32 +12,33 @@ const int finger3_pin = 6;
 const int finger4_pin = 7;
 const int finger5_pin = 8;
 
+const int max_pos;
 
 int positions[28][5] = {
-  {0, 0, 0, 0, 0},  // a
-  {10, 0, 0, 0, 0},  // b
-  {20, 0, 0, 0, 0},  // c
-  {30, 0, 0, 0, 0},  // d
-  {40, 0, 0, 0, 0},  // e
+  {max_pos, max_pos, max_pos, max_pos, 0},  // a
+  {0, 0, 0, 0, max_pos},  // b
+  {0, 0, 0, 0, 0},  // c
+  {max_pos, 0, max_pos, max_pos, max_pos},  // d
+  {0, 0, 0, 0, 0},  // e
   {50, 0, 0, 0, 0},  // f
-  {60, 0, 0, 0, 0},  // g
-  {70, 0, 0, 0, 0},  // h
-  {80, 0, 0, 0, 0},  // i
-  {90, 0, 0, 0, 0},  // j
-  {100, 0, 0, 0, 0},  // k
-  {110, 0, 0, 0, 0},  // l
-  {120, 0, 0, 0, 0},  // m
-  {130, 0, 0, 0, 0},  // n
-  {140, 0, 0, 0, 0},  // o
-  {150, 0, 0, 0, 0},  // p
-  {160, 0, 0, 0, 0},  // q
-  {170, 0, 0, 0, 0},  // r
-  {180, 0, 0, 0, 0},  // s
-  {0, 0, 0, 0, 0},  // t
-  {0, 0, 0, 0, 0},  // u
-  {0, 0, 0, 0, 0},  // v
-  {0, 0, 0, 0, 0},  // w
-  {0, 0, 0, 0, 0},  // x
+  {0, 0, max_pos, max_pos, max_pos},  // g
+  {0, 0, 0, max_pos, max_pos},  // h
+  {0, max_pos, max_pos, max_pos, max_pos},  // i
+  {0, max_pos, max_pos, max_pos, 0},  // j
+  {0, 0, 0, max_pos, max_pos},  // k
+  {0, 0, max_pos, max_pos, max_pos},  // l
+  {max_pos, max_pos, max_pos, max_pos, max_pos},  // m
+  {max_pos, max_pos, max_pos, max_pos, max_pos},  // n
+  {max_pos, max_pos, max_pos, max_pos, max_pos},  // o
+  {0, 0, 0, max_pos, max_pos},  // p
+  {0, 0, max_pos, max_pos, max_pos},  // q
+  {170, 0, 0, max_pos, max_pos},  // r
+  {max_pos, max_pos, max_pos, max_pos, max_pos},  // s
+  {max_pos, max_pos, max_pos, max_pos, max_pos},  // t
+  {max_pos, 0, 0, max_pos, max_pos},  // u
+  {max_pos, 0, 0, max_pos, max_pos},  // v
+  {max_pos, 0, 0, 0, max_pos},  // w
+  {0, 0, max_pos, max_pos, max_pos},  // x
   {0, 0, 0, 0, 0},  // y
   {0, 0, 0, 0, 0},  // z
   {0, 0, 0, 0, 0},  // nothing

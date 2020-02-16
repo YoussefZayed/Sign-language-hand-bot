@@ -18,8 +18,7 @@ def generate_sequence(size):
 
 
 def video_cap():
-
-    generate_sequence(10)
+    sequence = ['A', 'B', 'C', 'D', 'E']
 
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
@@ -101,5 +100,4 @@ def video_cap():
 
 
 if __name__ == '__main__':
-
     video_cap()
