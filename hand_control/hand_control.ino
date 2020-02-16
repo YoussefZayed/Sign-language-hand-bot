@@ -1,15 +1,11 @@
-#include <AccelStepper.h>
+#include <Servo.h>
 
-#define FULLSTEP 4
-
-const int stepsPerRev = 2048;
-
-AccelStepper steppers[5] = {
-  AccelStepper(FULLSTEP, 8, 10, 9, 11),
-  AccelStepper(FULLSTEP, 8, 10, 9, 11),
-  AccelStepper(FULLSTEP, 8, 10, 9, 11),
-  AccelStepper(FULLSTEP, 8, 10, 9, 11),
-  AccelStepper(FULLSTEP, 8, 10, 9, 11)
+Servo servos[5] = {
+  Servo(),
+  Servo(),
+  Servo(),
+  Servo(),
+  Servo()
 };
 
 int positions[28][5] = {
@@ -76,27 +72,25 @@ int sequences[28][5] = {
 
 void move_fingers(char letter) {
   int i = letter - 'A';
-  for (int i = 0; i < 5; ++i) {
-    steppers[sequence[i]].moveTo(positions[i][sequence[i]]);
-    steppers[sequence[i]].run();
-  }
+  for (int j = 0; i < 5; ++j)
+    servos[sequences[i][j]].write(positions[i][sequences[i][j]]);
 }
 
 void setup() {
   Serial.begin(115200);
 
-  for (int i = 0; i < 5; ++i) {
-    steppers[i].setMaxSpeed(1000.0);
-    steppers[i].setAcceleration(50.0);
-    steppers[i].setSpeed(400);
-  }
+  servos[0].attach(4);
+  servos[1].attach(5);
+  servos[2].attach(6);
+  servos[3].attach(7);
+  servos[4].attach(8);
 }
 
 void loop() {  
-//  if (Serial.available() > 0) {
-//    char letter = Serial.read();
-//    Serial.println(letter);
-//    move_fingers(letter);
-//    delay(100);
-//  }
+  if (Serial.available() > 0) {
+    char letter = Serial.read();
+    Serial.println(letter);
+    move_fingers(letter);
+    delay(100);
+  }
 }
