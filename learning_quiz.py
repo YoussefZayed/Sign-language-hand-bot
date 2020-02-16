@@ -18,7 +18,7 @@ def generate_sequence(size):
 
 
 def video_cap():
-    sequence = ['A', 'B', 'C', 'D', 'E']
+    sequence = ['A', 'B', 'C']
 
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
@@ -48,10 +48,6 @@ def video_cap():
             show_congrats = False
             break
 
-        if correct and time.time() - ts > 3:
-            correct = False
-            i += 1
-
         if correct:
             img = cv2.rectangle(frame, (x, y), (x + roi_size, y + roi_size), (0, 255, 0), 1)
             cv2.putText(img, 'Target: ' + guessed, (x, y - 10), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 255, 0), 1)
@@ -74,11 +70,15 @@ def video_cap():
                     correct = True
                     ts = time.time()
 
+        if correct and time.time() - ts > 3 and i < len(sequence):
+            correct = False
+            i += 1
+
         cv2.imshow('Video Stream', img)
 
     # display congratulations
     if show_congrats:
-        print('hi')
+
         ts = time.time()
         while time.time() - ts < 5:
             ret, frame = cap.read()
