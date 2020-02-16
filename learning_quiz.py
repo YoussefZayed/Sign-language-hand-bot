@@ -18,8 +18,7 @@ def generate_sequence(size):
 
 
 def video_cap():
-
-    generate_sequence(10)
+    sequence = ['A', 'B', 'C', 'D', 'E']
 
     cap = cv2.VideoCapture(0)
     cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
@@ -88,7 +87,8 @@ def video_cap():
 
             h, w, _ = frame.shape
 
-            cv2.putText(img, 'Congratulations!', (int(w/2) - int(w/4), int(h/2)), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 0), 2)
+            cv2.putText(img, 'Congratulations!', (int(w/2) - int(w/4), int(h/2)),
+                        cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 0), 2)
             cv2.imshow('Video Stream', img)
 
             key = cv2.waitKey(100)
@@ -101,5 +101,4 @@ def video_cap():
 
 
 if __name__ == '__main__':
-
     video_cap()
