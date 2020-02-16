@@ -8,8 +8,8 @@ ARDUINO_PORT = '/dev/ttyACM0'
 
 def video_cap(arduino):
     cap = cv2.VideoCapture(0)
-    cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow('frame', 2000, 1500)
+    cv2.namedWindow('Video Stream', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Video Stream', 2000, 1500)
 
     letter = ' '
 
